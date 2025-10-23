@@ -7,9 +7,21 @@ In RHEL-based distros, install:
 
 ```bash
 dnf install libglvnd libglvnd-devel
+```
+
+```bash
 dnf install kernel-devel-$(uname -r) # RHEL 8 and later
+```
+
+```bash
 dnf install kernel-64k-devel-matched kernel-headers
+```
+
+```bash
 dnf install mokutil openssl kernel-devel kernel-headers gcc make
+```
+
+```bash
 dnf install gcc gcc-gfortran # GCC Compiler
 ```
 
@@ -38,8 +50,17 @@ Specify the location to extract, in this case the newly created directory.
 
 ```bash
 mkdir -p /etc/ssl/private/custom-mok-keys
+```
+
+```bash
 cd /etc/ssl/private/custom-mok-keys
+```
+
+```bash
 openssl req -new -x509 -newkey rsa:2048 -keyout nvidia-driver.key -outform DER -out nvidia-driver.der -nodes -days 5500 -subj "/CN=My custom signing key for Nvidia driver/"
+```
+
+```bash
 # Convert to PEM format
 openssl x509 -in nvidia-driver.der -inform DER -out nvidia-driver.pem -outform PEM
 ```
@@ -80,6 +101,8 @@ It is important to first install the display driver before installing the CUDA d
 
 ```bash
 cd Nv/
+```
+```bash
 ./NVIDIA-Linux-x86_64-*.run --module-signing-secret-key=/etc/ssl/private/custom-mok-keys/nvidia-driver.key --module-signing-public-key=/etc/ssl/private/custom-mok-keys/nvidia-driver.pem
 ```
 
@@ -103,4 +126,3 @@ Upon installation, manually add the PATH to the ~/.bashrc and refresh.
 ```bash
 rm /etc/ssl/private/custom-mok-keys/nvidia-driver.key
 ```
-
