@@ -38,7 +38,7 @@ mokutil --list-enrolled | grep "My custom signing key for Nvidia driver"
 cd Nv/
 ./NVIDIA-Linux-x86_64-*.run --module-signing-secret-key=/etc/ssl/private/custom-mok-keys/nvidia-driver.key --module-signing-public-key=/etc/ssl/private/custom-mok-keys/nvidia-driver.pem
 
-#Install CUDA Driver
+#Install CUDA Driver cuda-*.run https://developer.nvidia.com/cuda-downloads
 
 cd /
 ./cuda_13.0.2_580.95.05_linux.run
