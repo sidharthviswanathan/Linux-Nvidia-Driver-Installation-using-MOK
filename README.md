@@ -126,3 +126,5 @@ Upon installation, manually add the PATH to the ~/.bashrc and refresh.
 ```bash
 rm /etc/ssl/private/custom-mok-keys/nvidia-driver.key
 ```
+
+<sub>**Disclaimer:** Community-created documentation, not affiliated with NVIDIA Corporation. NVIDIA® and CUDA® are registered trademarks of NVIDIA Corporation. Provided "as-is" without warranties - exercise caution when modifying system settings.</sub>
