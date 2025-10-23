@@ -39,9 +39,9 @@ Specify the location to extract, in this case the newly created directory.
 ```bash
 mkdir -p /etc/ssl/private/custom-mok-keys
 cd /etc/ssl/private/custom-mok-keys
-sudo openssl req -new -x509 -newkey rsa:2048 -keyout nvidia-driver.key -outform DER -out nvidia-driver.der -nodes -days 5500 -subj "/CN=My custom signing key for Nvidia driver/"
+openssl req -new -x509 -newkey rsa:2048 -keyout nvidia-driver.key -outform DER -out nvidia-driver.der -nodes -days 5500 -subj "/CN=My custom signing key for Nvidia driver/"
 # Convert to PEM format
-sudo openssl x509 -in nvidia-driver.der -inform DER -out nvidia-driver.pem -outform PEM
+openssl x509 -in nvidia-driver.der -inform DER -out nvidia-driver.pem -outform PEM
 ```
 
 ### Step 3.2: Enroll the Key with MOK
