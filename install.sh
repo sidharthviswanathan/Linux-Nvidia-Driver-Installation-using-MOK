@@ -14,7 +14,7 @@ mkdir Nv
 
 mkdir -p /etc/ssl/private/custom-mok-keys
 cd /etc/ssl/private/custom-mok-keys
-sudo openssl req -new -x509 -newkey rsa:2048 -keyout nvidia-driver.key -outform DER -out nvidia-driver.der -nodes -days 5500 -subj "/CN=My custom signing key for Nvidia driver/"
+sudo openssl req -new -x509 -newkey rsa:4096 -keyout nvidia-driver.key -outform DER -out nvidia-driver.der -nodes -days 5500 -subj "/CN=My custom signing key for Nvidia driver/"
 # Convert to PEM format
 sudo openssl x509 -in nvidia-driver.der -inform DER -out nvidia-driver.pem -outform PEM
 
