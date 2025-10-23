@@ -103,4 +103,4 @@ Upon installation, manually add the PATH to the ~/.bashrc and refresh.
 ```bash
 $ rm /etc/ssl/private/custom-mok-keys/nvidia-driver.key
 ```
-79
+
