@@ -25,9 +25,9 @@ Upon downloading the cuda*.run file:
 
 1. Login as root
 ```bash
-$ su -
-$ mkdir Nv
-$ ./cuda_13.0.2_580.95.05_linux.run --extract=/Nv
+su -
+mkdir Nv
+./cuda_13.0.2_580.95.05_linux.run --extract=/Nv
 ```
 
 Specify the location to extract, in this case the newly created directory.
@@ -37,24 +37,24 @@ Specify the location to extract, in this case the newly created directory.
 ### Step 3.1: Create Machine Owner Keys (MOK) Signing Keys and Store Securely as Root
 
 ```bash
-$ mkdir -p /etc/ssl/private/custom-mok-keys
-$ cd /etc/ssl/private/custom-mok-keys
-$ sudo openssl req -new -x509 -newkey rsa:2048 -keyout nvidia-driver.key -outform DER -out nvidia-driver.der -nodes -days 5500 -subj "/CN=My custom signing key for Nvidia driver/"
+mkdir -p /etc/ssl/private/custom-mok-keys
+cd /etc/ssl/private/custom-mok-keys
+sudo openssl req -new -x509 -newkey rsa:2048 -keyout nvidia-driver.key -outform DER -out nvidia-driver.der -nodes -days 5500 -subj "/CN=My custom signing key for Nvidia driver/"
 # Convert to PEM format
-$ sudo openssl x509 -in nvidia-driver.der -inform DER -out nvidia-driver.pem -outform PEM
+sudo openssl x509 -in nvidia-driver.der -inform DER -out nvidia-driver.pem -outform PEM
 ```
 
 ### Step 3.2: Enroll the Key with MOK
 
 ```bash
-$ mokutil --import nvidia-driver.der
+mokutil --import nvidia-driver.der
 ```
 
 You will be prompted to create a password. Use the same password during key enrollment.
 
 Reboot to apply:
 ```bash
-$ reboot
+reboot
 ```
 
 Upon reboot, you will be prompted to a blue screen to complete enrollment.
@@ -71,7 +71,7 @@ During boot:
 
 Upon enrollment after reboot, verify the enrollment:
 ```bash
-$ mokutil --list-enrolled | grep "My custom signing key for Nvidia driver"
+mokutil --list-enrolled | grep "My custom signing key for Nvidia driver"
 ```
 
 ## Step 4: Install NVIDIA Display Driver
@@ -79,8 +79,8 @@ $ mokutil --list-enrolled | grep "My custom signing key for Nvidia driver"
 It is important to first install the display driver before installing the CUDA driver.
 
 ```bash
-$ cd Nv/
-$ ./NVIDIA-Linux-x86_64-*.run --module-signing-secret-key=/etc/ssl/private/custom-mok-keys/nvidia-driver.key --module-signing-public-key=/etc/ssl/private/custom-mok-keys/nvidia-driver.pem
+cd Nv/
+./NVIDIA-Linux-x86_64-*.run --module-signing-secret-key=/etc/ssl/private/custom-mok-keys/nvidia-driver.key --module-signing-public-key=/etc/ssl/private/custom-mok-keys/nvidia-driver.pem
 ```
 
 Review and accept the terms and follow through the steps. The driver will be installed successfully.
@@ -88,8 +88,8 @@ Review and accept the terms and follow through the steps. The driver will be ins
 ## Step 5: Install CUDA Driver
 
 ```bash
-$ cd /
-$ ./cuda_13.0.2_580.95.05_linux.run
+cd /
+./cuda_13.0.2_580.95.05_linux.run
 ```
 
 > **Important:** Uncheck install display driver and proceed.
@@ -101,6 +101,6 @@ Upon installation, manually add the PATH to the ~/.bashrc and refresh.
 ## Step 6: (Optional) Remove Private Key to Avoid Further MOK Signings
 
 ```bash
-$ rm /etc/ssl/private/custom-mok-keys/nvidia-driver.key
+rm /etc/ssl/private/custom-mok-keys/nvidia-driver.key
 ```
 
